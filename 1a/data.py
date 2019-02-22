@@ -1,27 +1,36 @@
-class CategoricalAttribute:
-  def __init__(self, name, categories):
-    self.name = name
-    self.categories = categories
+from attribute import CategoricalAttribute
+from table import Table
+from entry import Entry
 
-  def __str__(self):
-    return "{0}: {1}\n".format(self.name, ", ".join(self.categories))
 
-class Table:
-  def __init__(self, attributeInfo):
-    self.attributeInfo = attributeInfo
-  
-  entries = []
+def addAllEntries(file, table):
+    for line in file.readlines():
+        tmp = [x.strip() for x in line.split(',')]
+        values = tmp[:-1]
+        conditionalValue = tmp[-1] == '>50K'
+        table.entries.append(Entry(values, conditionalValue))
 
-with open('adult.names') as file:
-  attributeInfo = [ CategoricalAttribute(line.split(': ')[0], line.split(': ')[1].split(', ')) for line in file.readlines() ]
 
-data = Table(attributeInfo)
-test = Table(attributeInfo)
+attributeInfo = []
 
-with open('adult.data') as file:
-  for entry in [ line.split(", ")[:-1] for line in file.readlines() ]:
-    data.entries.append(entry)
+with open('1a/adult.names') as file:
+    for line in file.readlines():
+        tmp = line.split(': ')
+        name = tmp[0]
+        categories = tmp[1].split(', ')
+        attributeInfo.append(CategoricalAttribute(name, categories))
 
-with open('adult.test') as file:
-  for entry in [ line.split(", ")[:-1] for line in file.readlines() ]:
-    test.entries.append(entry)
+data = Table('data', attributeInfo)
+test = Table('test', attributeInfo)
+
+with open('1a/adult.data') as file:
+    addAllEntries(file, data)
+
+with open('1a/adult.test') as file:
+    addAllEntries(file, test)
+
+with open('1a/out.data', 'w') as file:
+    file.write(str(data))
+
+with open('1a/out.test', 'w') as file:
+    file.write(str(test))

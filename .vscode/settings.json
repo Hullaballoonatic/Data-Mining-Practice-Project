@@ -1,3 +1,7 @@
 {
-  "python.pythonPath": "C:\\Users\\Hulla\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
+  "python.pythonPath": "C:\\Users\\Hulla\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+  "python.linting.pep8Enabled": true,
+  "python.linting.enabled": false,
+  "python.linting.banditEnabled": false,
+  "python.linting.mypyEnabled": false
 }
