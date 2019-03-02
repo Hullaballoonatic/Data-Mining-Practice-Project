@@ -6,7 +6,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 
 
 def run_kmeans(data_set, test_set):
-    k3 = KMeans(n_clusters=3).fit(data_set.values)
+    k3 = KMeans(n_clusters=3).fit(data_set)
     k5 = KMeans(n_clusters=5).fit(data_set)
     k10 = KMeans(n_clusters=10).fit(data_set)
 

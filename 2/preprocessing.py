@@ -18,7 +18,7 @@ def do_preprocessing(data_file: str, test_file: str, skip_initial_space=False,
 
     categorical_attributes = [
         'workclass', 'education', 'marital-status', 'occupation',
-        'relationship', 'race', 'sex', 'native-country'
+        'relationship', 'race', 'sex', 'native-country', 'income'
     ]
 
     X = pd.read_csv(data_file, names=header,
@@ -42,4 +42,5 @@ def do_preprocessing(data_file: str, test_file: str, skip_initial_space=False,
     else:
         return X, Y
 
-do_preprocessing('adult.data', 'adult.test', skip_initial_space=True, save_file=True)
+do_preprocessing('adult.data', 'adult.test', skip_initial_space=True,
+                 save_file=True)
