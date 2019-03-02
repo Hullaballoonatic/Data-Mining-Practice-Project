@@ -2,8 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def do_preprocessing(data_file: str, test_file: str, skip_initial_space=False,
-                     save_file=False):
+def do_preprocessing(train_file: str, test_file: str, skip_initial_space=False, save_file=False):
     header = [
         'age', 'workclass', 'fnlwgt', 'education', 'education-num',
         'marital-status', 'occupation', 'relationship', 'race', 'sex',
@@ -21,26 +20,21 @@ def do_preprocessing(data_file: str, test_file: str, skip_initial_space=False,
         'relationship', 'race', 'sex', 'native-country', 'income'
     ]
 
-    X = pd.read_csv(data_file, names=header,
-                    skipinitialspace=skip_initial_space, comment='|')
+    train = pd.read_csv(train_file, names=header, skipinitialspace=skip_initial_space, comment='|')
 
-    Y = pd.read_csv(test_file, names=header,
-                    skipinitialspace=skip_initial_space, comment='|')
+    test = pd.read_csv(test_file, names=header, skipinitialspace=skip_initial_space, comment='|')
 
-    X = pd.get_dummies(X, columns=categorical_attributes)
-    Y = pd.get_dummies(Y, columns=categorical_attributes)
+    train = pd.get_dummies(train, columns=categorical_attributes)
+    test = pd.get_dummies(test, columns=categorical_attributes)
 
-    X[numeric_attributes] = np.where(X[numeric_attributes].mean() >=
-                                     X[numeric_attributes], 0, 1)
+    train[numeric_attributes] = np.where(train[numeric_attributes].mean() >= train[numeric_attributes], 0, 1)
     
-    Y[numeric_attributes] = np.where(Y[numeric_attributes].mean() >=
-                                     Y[numeric_attributes], 0, 1)
+    test[numeric_attributes] = np.where(test[numeric_attributes].mean() >= test[numeric_attributes], 0, 1)
 
     if save_file:
-        X.to_csv('p_' + data_file)
-        Y.to_csv('p_' + test_file)
+        train.to_csv('data/train')
+        test.to_csv('data/test')
     else:
-        return X, Y
+        return train, test
 
-do_preprocessing('adult.data', 'adult.test', skip_initial_space=True,
-                 save_file=True)
+do_preprocessing('data/adult.data', 'data/adult.test', skip_initial_space=True, save_file=True)

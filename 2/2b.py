@@ -5,8 +5,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 
 
-train = pd.read_csv('p_adult.data')
-test = pd.read_csv('p_adult.test').tail(10)
+train = pd.read_csv('data/train')
+test = pd.read_csv('data/test').tail(10)
 
 knn3 = KNeighborsClassifier(n_neighbors=3).fit(Y, X)
 # knn5 = NearestNeighbors(n_neighbors=5).fit(Y)
