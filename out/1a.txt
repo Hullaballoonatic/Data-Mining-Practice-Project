@@ -1,0 +1,5 @@
+Accuracy:  0.642
+TP/Recall: 0.217
+FP rate:   0.782
+Precision: 0.246
+F1 Score:  0.230
