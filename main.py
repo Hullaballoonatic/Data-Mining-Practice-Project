@@ -107,6 +107,6 @@ while True:
     elif choice == 'q':
         break
     elif choice not in problems.keys():
-        print('not an option.\noptions are ' + problems.keys().join(', '))
+        print('not an option.\noptions are ' + ', '.join(problems.keys()))
     else:
         problems[choice]()
